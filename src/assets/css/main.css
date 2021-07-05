@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  border-color: none !important;
+  --tw-ring-color: none !important;
+  --tw-ring-shadow: none !important;
+}
+
+.slider {
+  -webkit-appearance: none;
+  outline: none;
+  height: 36px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 40px;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 5px;
+  height: 40;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.icon-light path, .icon-light rect {
+  fill: blue !important;
+}
