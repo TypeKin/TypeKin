@@ -1,7 +1,39 @@
 import React, { useState } from 'react';
 
-const NavBar = () => {
+import { signIn, signOut } from 'next-auth/client';
+
+const NavBar = ({ userSession }) => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+
+  const renderAuthOptions = () => {
+    if (userSession) {
+      return (
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          role="menuitem"
+          onClick={() => signOut()}
+        >
+          Sign out
+        </a>
+      );
+    } else {
+      return (
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          role="menuitem"
+          onClick={() => signIn('github')}
+        >
+          Sign in
+        </a>
+      );
+    }
+  };
+
+  const getProfilePicture = () => {
+    return userSession?.user.image || '/images/profile/placeholder-profile.png';
+  };
 
   return (
     <nav className="bg-gray-dark">
@@ -47,7 +79,7 @@ const NavBar = () => {
                   >
                     <img
                       className="h-8 w-8 rounded-full"
-                      src="/images/profile/placeholder-profile.jpeg"
+                      src={getProfilePicture()}
                     />
                   </button>
                 </div>
@@ -73,13 +105,7 @@ const NavBar = () => {
                   >
                     Settings
                   </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Sign out
-                  </a>
+                  {renderAuthOptions()}
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 
+import { Provider } from 'next-auth/client';
+
 import '../assets/css/main.css';
 
 const App = ({ Component, pageProps }) => {
@@ -9,7 +11,9 @@ const App = ({ Component, pageProps }) => {
       <Head>
         <title>TypeKin</title>
       </Head>
-      <Component {...pageProps} />
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 };
